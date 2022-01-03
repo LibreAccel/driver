@@ -30,19 +30,33 @@ impl From<u64> for PhysicalAddress {
   fn from(value: u64) -> Self { Self(value) }
 }
 
-impl Into<u64> for PhysicalAddress {
-  fn into(self) -> u64 { self.0 }
+// impl Into<u64> for PhysicalAddress {
+//   fn into(self) -> u64 { self.0 }
+// }
+impl From<PhysicalAddress> for u64 {
+  fn from(p: PhysicalAddress) -> Self {
+    p.0
+  }
 }
 
 impl From<PHYSICAL_ADDRESS> for PhysicalAddress {
   fn from(value: PHYSICAL_ADDRESS) -> Self { Self(unsafe { value.QuadPart } as _) }
 }
 
-impl Into<PHYSICAL_ADDRESS> for PhysicalAddress {
-  fn into(self) -> PHYSICAL_ADDRESS {
+// impl Into<PHYSICAL_ADDRESS> for PhysicalAddress {
+//   fn into(self) -> PHYSICAL_ADDRESS {
+//     let mut addr: PHYSICAL_ADDRESS = unsafe { core::mem::zeroed() };
+//
+//     addr.QuadPart = self.0 as _;
+//
+//     addr
+//   }
+// }
+impl From<PhysicalAddress> for PHYSICAL_ADDRESS {
+  fn from(p: PhysicalAddress) -> Self {
     let mut addr: PHYSICAL_ADDRESS = unsafe { core::mem::zeroed() };
 
-    addr.QuadPart = self.0 as _;
+    addr.QuadPart = p.0 as _;
 
     addr
   }
@@ -57,11 +71,29 @@ pub enum CopyAddress {
 unsafe impl Send for CopyAddress {}
 unsafe impl Sync for CopyAddress {}
 
-impl Into<(u32, MM_COPY_ADDRESS)> for CopyAddress {
-  fn into(self) -> (u32, MM_COPY_ADDRESS) {
+// impl Into<(u32, MM_COPY_ADDRESS)> for CopyAddress {
+//   fn into(self) -> (u32, MM_COPY_ADDRESS) {
+//     let mut copy_addr: MM_COPY_ADDRESS = unsafe { core::mem::zeroed() };
+//
+//     let flags = match self {
+//       CopyAddress::Virtual(addr) => {
+//         copy_addr.__bindgen_anon_1.VirtualAddress = addr as _;
+//         MM_COPY_MEMORY_VIRTUAL
+//       }
+//       CopyAddress::Physical(addr) => {
+//         copy_addr.__bindgen_anon_1.PhysicalAddress = addr.into();
+//         MM_COPY_MEMORY_PHYSICAL
+//       }
+//     };
+//
+//     (flags, copy_addr)
+//   }
+// }
+impl From<CopyAddress> for (u32, MM_COPY_ADDRESS) {
+  fn from(c: CopyAddress) -> Self {
     let mut copy_addr: MM_COPY_ADDRESS = unsafe { core::mem::zeroed() };
 
-    let flags = match self {
+    let flags = match c {
       CopyAddress::Virtual(addr) => {
         copy_addr.__bindgen_anon_1.VirtualAddress = addr as _;
         MM_COPY_MEMORY_VIRTUAL

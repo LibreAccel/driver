@@ -41,13 +41,23 @@ impl From<u32> for TransferMethod {
   }
 }
 
-impl Into<u32> for TransferMethod {
-  fn into(self) -> u32 {
-    match self {
-      Self::Neither => METHOD_NEITHER,
-      Self::InputDirect => METHOD_IN_DIRECT,
-      Self::OutputDirect => METHOD_OUT_DIRECT,
-      Self::Buffered => METHOD_BUFFERED,
+// impl Into<u32> for TransferMethod {
+//   fn into(self) -> u32 {
+//     match self {
+//       Self::Neither => METHOD_NEITHER,
+//       Self::InputDirect => METHOD_IN_DIRECT,
+//       Self::OutputDirect => METHOD_OUT_DIRECT,
+//       Self::Buffered => METHOD_BUFFERED,
+//     }
+//   }
+// }
+impl From<TransferMethod> for u32 {
+  fn from(t: TransferMethod) -> Self {
+    match t {
+      TransferMethod::Neither => METHOD_NEITHER,
+      TransferMethod::InputDirect => METHOD_IN_DIRECT,
+      TransferMethod::OutputDirect => METHOD_OUT_DIRECT,
+      TransferMethod::Buffered => METHOD_BUFFERED,
     }
   }
 }
@@ -99,12 +109,22 @@ impl From<u32> for ControlCode {
   }
 }
 
-impl Into<u32> for ControlCode {
-  fn into(self) -> u32 {
-    let method = Into::<u32>::into(self.3) << Self::METHOD_SHIFT;
-    let num = self.2 << Self::NUM_SHIFT;
-    let access = self.1.bits() << Self::ACCESS_SHIFT;
-    let ty = Into::<u32>::into(self.0) << Self::TYPE_SHIFT;
+// impl Into<u32> for ControlCode {
+//   fn into(self) -> u32 {
+//     let method = Into::<u32>::into(self.3) << Self::METHOD_SHIFT;
+//     let num = self.2 << Self::NUM_SHIFT;
+//     let access = self.1.bits() << Self::ACCESS_SHIFT;
+//     let ty = Into::<u32>::into(self.0) << Self::TYPE_SHIFT;
+//
+//     ty | access | num | method
+//   }
+// }
+impl From<ControlCode> for u32 {
+  fn from(c: ControlCode) -> Self {
+    let method = Into::<u32>::into(c.3) << ControlCode::METHOD_SHIFT;
+    let num = c.2 << ControlCode::NUM_SHIFT;
+    let access = c.1.bits() << ControlCode::ACCESS_SHIFT;
+    let ty = Into::<u32>::into(c.0) << ControlCode::TYPE_SHIFT;
 
     ty | access | num | method
   }

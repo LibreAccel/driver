@@ -46,7 +46,7 @@ pub struct PushLock<T: ?Sized> {
   pub(crate) data: UnsafeCell<T>,
 }
 
-unsafe impl<T> Send for PushLock<T> {}
+unsafe impl<T> Send for PushLock<T> where T: Send {}
 unsafe impl<T> Sync for PushLock<T> {}
 
 impl<T> PushLock<T> {

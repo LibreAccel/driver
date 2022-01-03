@@ -113,9 +113,73 @@ pub enum DeviceType {
   WaveOut,
 }
 
-impl Into<u32> for DeviceType {
-  fn into(self) -> u32 {
-    match self {
+// impl Into<u32> for DeviceType {
+//   fn into(self) -> u32 {
+//     match self {
+//       DeviceType::Port8042 => windows_kernel_sys::base::FILE_DEVICE_8042_PORT,
+//       DeviceType::Acpi => windows_kernel_sys::base::FILE_DEVICE_ACPI,
+//       DeviceType::Battery => windows_kernel_sys::base::FILE_DEVICE_BATTERY,
+//       DeviceType::Beep => windows_kernel_sys::base::FILE_DEVICE_BEEP,
+//       DeviceType::BusExtender => windows_kernel_sys::base::FILE_DEVICE_BUS_EXTENDER,
+//       DeviceType::Cdrom => windows_kernel_sys::base::FILE_DEVICE_CD_ROM,
+//       DeviceType::CdromFileSystem => windows_kernel_sys::base::FILE_DEVICE_CD_ROM_FILE_SYSTEM,
+//       DeviceType::Changer => windows_kernel_sys::base::FILE_DEVICE_CHANGER,
+//       DeviceType::Controller => windows_kernel_sys::base::FILE_DEVICE_CONTROLLER,
+//       DeviceType::DataLink => windows_kernel_sys::base::FILE_DEVICE_DATALINK,
+//       DeviceType::Dfs => windows_kernel_sys::base::FILE_DEVICE_DFS,
+//       DeviceType::DfsFileSystem => windows_kernel_sys::base::FILE_DEVICE_DFS_FILE_SYSTEM,
+//       DeviceType::DfsVolume => windows_kernel_sys::base::FILE_DEVICE_DFS_VOLUME,
+//       DeviceType::Disk => windows_kernel_sys::base::FILE_DEVICE_DISK,
+//       DeviceType::DiskFileSystem => windows_kernel_sys::base::FILE_DEVICE_DISK_FILE_SYSTEM,
+//       DeviceType::Dvd => windows_kernel_sys::base::FILE_DEVICE_DVD,
+//       DeviceType::FileSystem => windows_kernel_sys::base::FILE_DEVICE_FILE_SYSTEM,
+//       DeviceType::Fips => windows_kernel_sys::base::FILE_DEVICE_FIPS,
+//       DeviceType::FullscreenVideo => windows_kernel_sys::base::FILE_DEVICE_FULLSCREEN_VIDEO,
+//       DeviceType::InportPort => windows_kernel_sys::base::FILE_DEVICE_INPORT_PORT,
+//       DeviceType::Keyboard => windows_kernel_sys::base::FILE_DEVICE_KEYBOARD,
+//       DeviceType::Ks => windows_kernel_sys::base::FILE_DEVICE_KS,
+//       DeviceType::Ksec => windows_kernel_sys::base::FILE_DEVICE_KSEC,
+//       DeviceType::Mailslot => windows_kernel_sys::base::FILE_DEVICE_MAILSLOT,
+//       DeviceType::MassStorage => windows_kernel_sys::base::FILE_DEVICE_MASS_STORAGE,
+//       DeviceType::MidiIn => windows_kernel_sys::base::FILE_DEVICE_MIDI_IN,
+//       DeviceType::MidiOut => windows_kernel_sys::base::FILE_DEVICE_MIDI_OUT,
+//       DeviceType::Modem => windows_kernel_sys::base::FILE_DEVICE_MODEM,
+//       DeviceType::Mouse => windows_kernel_sys::base::FILE_DEVICE_MOUSE,
+//       DeviceType::MultiUncProvider => windows_kernel_sys::base::FILE_DEVICE_MULTI_UNC_PROVIDER,
+//       DeviceType::NamedPipe => windows_kernel_sys::base::FILE_DEVICE_NAMED_PIPE,
+//       DeviceType::Network => windows_kernel_sys::base::FILE_DEVICE_NETWORK,
+//       DeviceType::NetworkBrowser => windows_kernel_sys::base::FILE_DEVICE_NETWORK_BROWSER,
+//       DeviceType::NetworkFileSystem => windows_kernel_sys::base::FILE_DEVICE_NETWORK_FILE_SYSTEM,
+//       DeviceType::NetworkRedirector => windows_kernel_sys::base::FILE_DEVICE_NETWORK_REDIRECTOR,
+//       DeviceType::Null => windows_kernel_sys::base::FILE_DEVICE_NULL,
+//       DeviceType::ParallelPort => windows_kernel_sys::base::FILE_DEVICE_PARALLEL_PORT,
+//       DeviceType::PhysicalNetcard => windows_kernel_sys::base::FILE_DEVICE_PHYSICAL_NETCARD,
+//       DeviceType::Printer => windows_kernel_sys::base::FILE_DEVICE_PRINTER,
+//       DeviceType::Scanner => windows_kernel_sys::base::FILE_DEVICE_SCANNER,
+//       DeviceType::Screen => windows_kernel_sys::base::FILE_DEVICE_SCREEN,
+//       DeviceType::Serenum => windows_kernel_sys::base::FILE_DEVICE_SERENUM,
+//       DeviceType::SerialMousePort => windows_kernel_sys::base::FILE_DEVICE_SERIAL_MOUSE_PORT,
+//       DeviceType::SerialPort => windows_kernel_sys::base::FILE_DEVICE_SERIAL_PORT,
+//       DeviceType::Smartcard => windows_kernel_sys::base::FILE_DEVICE_SMARTCARD,
+//       DeviceType::Smb => windows_kernel_sys::base::FILE_DEVICE_SMB,
+//       DeviceType::Sound => windows_kernel_sys::base::FILE_DEVICE_SOUND,
+//       DeviceType::Streams => windows_kernel_sys::base::FILE_DEVICE_STREAMS,
+//       DeviceType::Tape => windows_kernel_sys::base::FILE_DEVICE_TAPE,
+//       DeviceType::TapeFileSystem => windows_kernel_sys::base::FILE_DEVICE_TAPE_FILE_SYSTEM,
+//       DeviceType::Termsrv => windows_kernel_sys::base::FILE_DEVICE_TERMSRV,
+//       DeviceType::Transport => windows_kernel_sys::base::FILE_DEVICE_TRANSPORT,
+//       DeviceType::Unknown => windows_kernel_sys::base::FILE_DEVICE_UNKNOWN,
+//       DeviceType::Vdm => windows_kernel_sys::base::FILE_DEVICE_VDM,
+//       DeviceType::Video => windows_kernel_sys::base::FILE_DEVICE_VIDEO,
+//       DeviceType::VirtualDisk => windows_kernel_sys::base::FILE_DEVICE_VIRTUAL_DISK,
+//       DeviceType::WaveIn => windows_kernel_sys::base::FILE_DEVICE_WAVE_IN,
+//       DeviceType::WaveOut => windows_kernel_sys::base::FILE_DEVICE_WAVE_OUT,
+//     }
+//   }
+// }
+impl From<DeviceType> for u32 {
+  fn from(d: DeviceType) -> Self {
+    match d {
       DeviceType::Port8042 => windows_kernel_sys::base::FILE_DEVICE_8042_PORT,
       DeviceType::Acpi => windows_kernel_sys::base::FILE_DEVICE_ACPI,
       DeviceType::Battery => windows_kernel_sys::base::FILE_DEVICE_BATTERY,

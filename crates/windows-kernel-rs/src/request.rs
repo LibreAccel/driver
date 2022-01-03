@@ -64,7 +64,7 @@ impl IoRequest {
   pub fn irp_mut(&self) -> &mut IRP { unsafe { &mut *self.irp } }
 
   pub fn flags(&self) -> IrpFlags {
-    IrpFlags::from_bits(self.irp().Flags).unwrap_or(IrpFlags::empty())
+    IrpFlags::from_bits(self.irp().Flags).unwrap_or_else(IrpFlags::empty)
   }
 
   pub fn stack_location(&self) -> &IO_STACK_LOCATION {
@@ -142,8 +142,13 @@ impl ReadRequest {
   }
 }
 
-impl Into<IoRequest> for ReadRequest {
-  fn into(self) -> IoRequest { self.inner }
+// impl Into<IoRequest> for ReadRequest {
+//   fn into(self) -> IoRequest { self.inner }
+// }
+impl From<ReadRequest> for IoRequest {
+  fn from(r: ReadRequest) -> Self {
+    r.inner
+  }
 }
 
 pub struct WriteRequest {
@@ -195,8 +200,13 @@ impl WriteRequest {
   }
 }
 
-impl Into<IoRequest> for WriteRequest {
-  fn into(self) -> IoRequest { self.inner }
+// impl Into<IoRequest> for WriteRequest {
+//   fn into(self) -> IoRequest { self.inner }
+// }
+impl From<WriteRequest> for IoRequest {
+  fn from(w: WriteRequest) -> Self {
+    w.inner
+  }
 }
 
 pub struct IoControlRequest {
@@ -262,6 +272,11 @@ impl IoControlRequest {
   }
 }
 
-impl Into<IoRequest> for IoControlRequest {
-  fn into(self) -> IoRequest { self.inner }
+// impl Into<IoRequest> for IoControlRequest {
+//   fn into(self) -> IoRequest { self.inner }
+// }
+impl From<IoControlRequest> for IoRequest {
+  fn from(i: IoControlRequest) -> Self {
+    i.inner
+  }
 }
