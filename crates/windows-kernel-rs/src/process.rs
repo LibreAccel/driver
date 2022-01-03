@@ -70,6 +70,8 @@ pub struct ProcessAttachment {
 }
 
 impl ProcessAttachment {
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn attach(process: PEPROCESS) -> Self {
     let mut state: KAPC_STATE = core::mem::zeroed();
 

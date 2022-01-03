@@ -16,6 +16,8 @@ pub enum UserPtr {
 }
 
 impl UserPtr {
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn new_buffered(ptr: *mut cty::c_void, read_size: usize, write_size: usize) -> Self {
     Self::Buffered {
       ptr,
@@ -24,6 +26,8 @@ impl UserPtr {
     }
   }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn new_direct(
     read_ptr: *const cty::c_void,
     write_ptr: *mut cty::c_void,
@@ -38,6 +42,8 @@ impl UserPtr {
     }
   }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn new_neither() -> Self { Self::Neither }
 
   pub fn read_size(&self) -> usize {

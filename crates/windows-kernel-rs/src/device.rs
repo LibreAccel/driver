@@ -257,14 +257,20 @@ unsafe impl Send for Device {}
 unsafe impl Sync for Device {}
 
 impl Device {
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn from_raw(raw: *mut DEVICE_OBJECT) -> Self {
     Self {
       raw,
     }
   }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn as_raw(&self) -> *const DEVICE_OBJECT { self.raw as *const _ }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn as_raw_mut(&self) -> *mut DEVICE_OBJECT { self.raw }
 
   pub fn into_raw(mut self) -> *mut DEVICE_OBJECT {

@@ -51,6 +51,8 @@ pub struct IoRequest {
 }
 
 impl IoRequest {
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn from_raw(irp: *mut IRP) -> Self {
     Self {
       irp,
