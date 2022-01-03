@@ -34,9 +34,7 @@ impl From<u64> for PhysicalAddress {
 //   fn into(self) -> u64 { self.0 }
 // }
 impl From<PhysicalAddress> for u64 {
-  fn from(p: PhysicalAddress) -> Self {
-    p.0
-  }
+  fn from(p: PhysicalAddress) -> Self { p.0 }
 }
 
 impl From<PHYSICAL_ADDRESS> for PhysicalAddress {

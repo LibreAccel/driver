@@ -146,9 +146,7 @@ impl ReadRequest {
 //   fn into(self) -> IoRequest { self.inner }
 // }
 impl From<ReadRequest> for IoRequest {
-  fn from(r: ReadRequest) -> Self {
-    r.inner
-  }
+  fn from(r: ReadRequest) -> Self { r.inner }
 }
 
 pub struct WriteRequest {
@@ -204,9 +202,7 @@ impl WriteRequest {
 //   fn into(self) -> IoRequest { self.inner }
 // }
 impl From<WriteRequest> for IoRequest {
-  fn from(w: WriteRequest) -> Self {
-    w.inner
-  }
+  fn from(w: WriteRequest) -> Self { w.inner }
 }
 
 pub struct IoControlRequest {
@@ -276,7 +272,5 @@ impl IoControlRequest {
 //   fn into(self) -> IoRequest { self.inner }
 // }
 impl From<IoControlRequest> for IoRequest {
-  fn from(i: IoControlRequest) -> Self {
-    i.inner
-  }
+  fn from(i: IoControlRequest) -> Self { i.inner }
 }

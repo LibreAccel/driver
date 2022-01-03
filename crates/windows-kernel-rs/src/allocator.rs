@@ -15,7 +15,11 @@ use crate::version::VersionInfo;
 
 /// See issue #52191.
 #[alloc_error_handler]
-fn alloc_error(_: Layout) -> ! { loop { x86_64::instructions::hlt() } }
+fn alloc_error(_: Layout) -> ! {
+  loop {
+    x86_64::instructions::hlt()
+  }
+}
 
 lazy_static! {
     /// The version of Microsoft Windows that is currently running. This is used by
