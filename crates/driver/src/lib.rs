@@ -24,6 +24,8 @@ const fn panic(_info: &core::panic::PanicInfo<'_>) -> ! { loop {} }
 #[lang = "eh_personality"]
 const extern "C" fn eh_personality() {}
 
+/// # Safety
+/// `unsafe`
 #[no_mangle]
 pub extern "system" fn driver_entry(driver: &mut DRIVER_OBJECT, _: &UNICODE_STRING) -> NTSTATUS {
   unsafe {
@@ -35,6 +37,8 @@ pub extern "system" fn driver_entry(driver: &mut DRIVER_OBJECT, _: &UNICODE_STRI
   winapi::shared::ntstatus::STATUS_SUCCESS
 }
 
+/// # Safety
+/// `unsafe`
 #[no_mangle]
 pub extern "system" fn driver_exit(_driver: &mut DRIVER_OBJECT) {
   unsafe {
