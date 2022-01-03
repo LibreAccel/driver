@@ -1,4 +1,3 @@
-// TODO
 #![deny(
   warnings,
   nonstandard_style,
@@ -6,6 +5,7 @@
   future_incompatible,
   rust_2018_idioms
 )]
+// TODO
 #![deny(clippy::pedantic)] // clippy::all, clippy::nursery,
 
 mod error;
