@@ -72,9 +72,73 @@ pub enum DeviceType {
   WaveOut,
 }
 
-impl Into<u32> for DeviceType {
-  fn into(self) -> u32 {
-    match self {
+// impl Into<u32> for DeviceType {
+//   fn into(self) -> u32 {
+//     match self {
+//       DeviceType::Port8042 => winapi::um::winioctl::FILE_DEVICE_8042_PORT,
+//       DeviceType::Acpi => winapi::um::winioctl::FILE_DEVICE_ACPI,
+//       DeviceType::Battery => winapi::um::winioctl::FILE_DEVICE_BATTERY,
+//       DeviceType::Beep => winapi::um::winioctl::FILE_DEVICE_BEEP,
+//       DeviceType::BusExtender => winapi::um::winioctl::FILE_DEVICE_BUS_EXTENDER,
+//       DeviceType::Cdrom => winapi::um::winioctl::FILE_DEVICE_CD_ROM,
+//       DeviceType::CdromFileSystem => winapi::um::winioctl::FILE_DEVICE_CD_ROM_FILE_SYSTEM,
+//       DeviceType::Changer => winapi::um::winioctl::FILE_DEVICE_CHANGER,
+//       DeviceType::Controller => winapi::um::winioctl::FILE_DEVICE_CONTROLLER,
+//       DeviceType::DataLink => winapi::um::winioctl::FILE_DEVICE_DATALINK,
+//       DeviceType::Dfs => winapi::um::winioctl::FILE_DEVICE_DFS,
+//       DeviceType::DfsFileSystem => winapi::um::winioctl::FILE_DEVICE_DFS_FILE_SYSTEM,
+//       DeviceType::DfsVolume => winapi::um::winioctl::FILE_DEVICE_DFS_VOLUME,
+//       DeviceType::Disk => winapi::um::winioctl::FILE_DEVICE_DISK,
+//       DeviceType::DiskFileSystem => winapi::um::winioctl::FILE_DEVICE_DISK_FILE_SYSTEM,
+//       DeviceType::Dvd => winapi::um::winioctl::FILE_DEVICE_DVD,
+//       DeviceType::FileSystem => winapi::um::winioctl::FILE_DEVICE_FILE_SYSTEM,
+//       DeviceType::Fips => winapi::um::winioctl::FILE_DEVICE_FIPS,
+//       DeviceType::FullscreenVideo => winapi::um::winioctl::FILE_DEVICE_FULLSCREEN_VIDEO,
+//       DeviceType::InportPort => winapi::um::winioctl::FILE_DEVICE_INPORT_PORT,
+//       DeviceType::Keyboard => winapi::um::winioctl::FILE_DEVICE_KEYBOARD,
+//       DeviceType::Ks => winapi::um::winioctl::FILE_DEVICE_KS,
+//       DeviceType::Ksec => winapi::um::winioctl::FILE_DEVICE_KSEC,
+//       DeviceType::Mailslot => winapi::um::winioctl::FILE_DEVICE_MAILSLOT,
+//       DeviceType::MassStorage => winapi::um::winioctl::FILE_DEVICE_MASS_STORAGE,
+//       DeviceType::MidiIn => winapi::um::winioctl::FILE_DEVICE_MIDI_IN,
+//       DeviceType::MidiOut => winapi::um::winioctl::FILE_DEVICE_MIDI_OUT,
+//       DeviceType::Modem => winapi::um::winioctl::FILE_DEVICE_MODEM,
+//       DeviceType::Mouse => winapi::um::winioctl::FILE_DEVICE_MOUSE,
+//       DeviceType::MultiUncProvider => winapi::um::winioctl::FILE_DEVICE_MULTI_UNC_PROVIDER,
+//       DeviceType::NamedPipe => winapi::um::winioctl::FILE_DEVICE_NAMED_PIPE,
+//       DeviceType::Network => winapi::um::winioctl::FILE_DEVICE_NETWORK,
+//       DeviceType::NetworkBrowser => winapi::um::winioctl::FILE_DEVICE_NETWORK_BROWSER,
+//       DeviceType::NetworkFileSystem => winapi::um::winioctl::FILE_DEVICE_NETWORK_FILE_SYSTEM,
+//       DeviceType::NetworkRedirector => winapi::um::winioctl::FILE_DEVICE_NETWORK_REDIRECTOR,
+//       DeviceType::Null => winapi::um::winioctl::FILE_DEVICE_NULL,
+//       DeviceType::ParallelPort => winapi::um::winioctl::FILE_DEVICE_PARALLEL_PORT,
+//       DeviceType::PhysicalNetcard => winapi::um::winioctl::FILE_DEVICE_PHYSICAL_NETCARD,
+//       DeviceType::Printer => winapi::um::winioctl::FILE_DEVICE_PRINTER,
+//       DeviceType::Scanner => winapi::um::winioctl::FILE_DEVICE_SCANNER,
+//       DeviceType::Screen => winapi::um::winioctl::FILE_DEVICE_SCREEN,
+//       DeviceType::Serenum => winapi::um::winioctl::FILE_DEVICE_SERENUM,
+//       DeviceType::SerialMousePort => winapi::um::winioctl::FILE_DEVICE_SERIAL_MOUSE_PORT,
+//       DeviceType::SerialPort => winapi::um::winioctl::FILE_DEVICE_SERIAL_PORT,
+//       DeviceType::Smartcard => winapi::um::winioctl::FILE_DEVICE_SMARTCARD,
+//       DeviceType::Smb => winapi::um::winioctl::FILE_DEVICE_SMB,
+//       DeviceType::Sound => winapi::um::winioctl::FILE_DEVICE_SOUND,
+//       DeviceType::Streams => winapi::um::winioctl::FILE_DEVICE_STREAMS,
+//       DeviceType::Tape => winapi::um::winioctl::FILE_DEVICE_TAPE,
+//       DeviceType::TapeFileSystem => winapi::um::winioctl::FILE_DEVICE_TAPE_FILE_SYSTEM,
+//       DeviceType::Termsrv => winapi::um::winioctl::FILE_DEVICE_TERMSRV,
+//       DeviceType::Transport => winapi::um::winioctl::FILE_DEVICE_TRANSPORT,
+//       DeviceType::Unknown => winapi::um::winioctl::FILE_DEVICE_UNKNOWN,
+//       DeviceType::Vdm => winapi::um::winioctl::FILE_DEVICE_VDM,
+//       DeviceType::Video => winapi::um::winioctl::FILE_DEVICE_VIDEO,
+//       DeviceType::VirtualDisk => winapi::um::winioctl::FILE_DEVICE_VIRTUAL_DISK,
+//       DeviceType::WaveIn => winapi::um::winioctl::FILE_DEVICE_WAVE_IN,
+//       DeviceType::WaveOut => winapi::um::winioctl::FILE_DEVICE_WAVE_OUT,
+//     }
+//   }
+// }
+impl From<DeviceType> for u32 {
+  fn from(d: DeviceType) -> Self {
+    match d {
       DeviceType::Port8042 => winapi::um::winioctl::FILE_DEVICE_8042_PORT,
       DeviceType::Acpi => winapi::um::winioctl::FILE_DEVICE_ACPI,
       DeviceType::Battery => winapi::um::winioctl::FILE_DEVICE_BATTERY,
@@ -233,13 +297,23 @@ impl From<u32> for TransferMethod {
   }
 }
 
-impl Into<u32> for TransferMethod {
-  fn into(self) -> u32 {
-    match self {
-      Self::Neither => METHOD_NEITHER,
-      Self::InputDirect => METHOD_IN_DIRECT,
-      Self::OutputDirect => METHOD_OUT_DIRECT,
-      Self::Buffered => METHOD_BUFFERED,
+// impl Into<u32> for TransferMethod {
+//   fn into(self) -> u32 {
+//     match self {
+//       Self::Neither => METHOD_NEITHER,
+//       Self::InputDirect => METHOD_IN_DIRECT,
+//       Self::OutputDirect => METHOD_OUT_DIRECT,
+//       Self::Buffered => METHOD_BUFFERED,
+//     }
+//   }
+// }
+impl From<TransferMethod> for u32 {
+  fn from(t: TransferMethod) -> Self {
+    match t {
+      TransferMethod::Neither => METHOD_NEITHER,
+      TransferMethod::InputDirect => METHOD_IN_DIRECT,
+      TransferMethod::OutputDirect => METHOD_OUT_DIRECT,
+      TransferMethod::Buffered => METHOD_BUFFERED,
     }
   }
 }
@@ -283,12 +357,22 @@ impl From<u32> for ControlCode {
   }
 }
 
-impl Into<u32> for ControlCode {
-  fn into(self) -> u32 {
-    let method = Into::<u32>::into(self.3) << Self::METHOD_SHIFT;
-    let num = self.2 << Self::NUM_SHIFT;
-    let access = self.1.bits() << Self::ACCESS_SHIFT;
-    let ty = Into::<u32>::into(self.0) << Self::TYPE_SHIFT;
+// impl Into<u32> for ControlCode {
+//   fn into(self) -> u32 {
+//     let method = Into::<u32>::into(self.3) << Self::METHOD_SHIFT;
+//     let num = self.2 << Self::NUM_SHIFT;
+//     let access = self.1.bits() << Self::ACCESS_SHIFT;
+//     let ty = Into::<u32>::into(self.0) << Self::TYPE_SHIFT;
+//
+//     ty | access | num | method
+//   }
+// }
+impl From<ControlCode> for u32 {
+  fn from(c: ControlCode) -> Self {
+    let method = Into::<u32>::into(c.3) << ControlCode::METHOD_SHIFT;
+    let num = c.2 << ControlCode::NUM_SHIFT;
+    let access = c.1.bits() << ControlCode::ACCESS_SHIFT;
+    let ty = Into::<u32>::into(c.0) << ControlCode::TYPE_SHIFT;
 
     ty | access | num | method
   }
