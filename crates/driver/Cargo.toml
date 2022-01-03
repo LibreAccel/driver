@@ -1,0 +1,28 @@
+[package]
+name = "driver"
+version = "0.1.0"
+authors = ["Fuwn <contact@fuwn.me>"]
+edition = "2021"
+description = ""
+homepage = "https://github.com/rawaccel/driver"
+repository = "https://github.com/rawaccel/driver"
+license = "GPL-3.0-only"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+# test = false
+# bench = false
+
+[build-dependencies]
+windows-kernel-build = { path = "../windows-kernel-build" }
+
+[dependencies.winapi]
+git = "https://github.com/Trantect/winapi-rs.git"
+branch = "feature/km"
+features = [
+  "wdm",
+  "ntstatus",
+  "ntdef"
+]

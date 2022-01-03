@@ -1,0 +1,16 @@
+[workspace]
+members = [
+  "crates/driver",
+  "crates/windows-kernel-build",
+  "crates/windows-kernel-rs",
+  "crates/windows-kernel-sys",
+  "crates/winioctl"
+]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"

@@ -1,0 +1,69 @@
+# -------------
+# | Variables |
+# -------------
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+VC_BUILD_DIR="C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"
+
+[env.development]
+TARGET_PATH = "target/debug"
+
+[env.production]
+TARGET_PATH = "target/release"
+# BUILD_RELEASE = "--release"
+
+# ------------
+# | Wrappers |
+# ------------
+[tasks.fmt]
+command = "cargo"
+args = ["fmt"]
+private = true
+
+[tasks.check]
+command = "cargo"
+args = ["check"]
+private = true
+
+[tasks.clippy]
+command = "cargo"
+args = ["clippy"]
+private = true
+
+# -------------
+# | Executors |
+# -------------
+[tasks.checkf]
+workspace = false
+dependencies = ["fmt", "check"]
+
+[tasks.checkfc]
+workspace = false
+dependencies = ["fmt", "check", "clippy"]
+
+[tasks.build-driver]
+script = '''
+cargo b %BUILD_FLAGS%
+'''
+
+[tasks.rename-driver]
+
+ignore_errors = true
+script = '''
+cd %TARGET_PATH%
+rename driver.dll driver.sys
+'''
+
+[tasks.clean-cert]
+script = '''
+# Remove the self-signed certificate.
+if exist DriverCertificate.cer ( rm DriverCertificate.cer )
+'''
+
+[tasks.sign]
+dependencies = ["build-driver", "rename"]
+script = '''
+call "%VC_BUILD_DIR%"
+if not exist DriverCertificate.cer ( makecert -r -pe -ss PrivateCertStore -n CN=DriverCertificate DriverCertificate.cer ) else ( echo Certificate already exists. )
+signtool sign /a /v /s PrivateCertStore /n DriverCertificate /fd certHash /t http://timestamp.digicert.com %TARGET_PATH%/driver.sys
+'''
