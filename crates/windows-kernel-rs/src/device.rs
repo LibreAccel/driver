@@ -437,8 +437,8 @@ pub struct DeviceExtension {
 /// # Safety
 /// `unsafe`
 pub unsafe extern "C" fn dispatch_device(device: *mut DEVICE_OBJECT, irp: *mut IRP) -> NTSTATUS {
-  let stack_location = unsafe { &*IoGetCurrentIrpStackLocation(irp) };
-  let device = unsafe { Device::from_raw(device) };
+  let stack_location = &*IoGetCurrentIrpStackLocation(irp);
+  let device = Device::from_raw(device);
   let vtable = device.vtable();
 
   match vtable.dispatch {

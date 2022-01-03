@@ -20,15 +20,13 @@ impl MemoryDescriptorList {
   pub unsafe fn new(addr: *mut core::ffi::c_void, size: usize) -> Result<Self, Error> {
     use windows_kernel_sys::ntoskrnl::IoAllocateMdl;
 
-    let raw = unsafe {
-      IoAllocateMdl(
-        addr,
-        size as _,
-        false as _,
-        false as _,
-        core::ptr::null_mut(),
-      )
-    };
+    let raw = IoAllocateMdl(
+      addr,
+      size as _,
+      false as _,
+      false as _,
+      core::ptr::null_mut(),
+    );
 
     if raw.is_null() {
       return Err(Error::INSUFFICIENT_RESOURCES);
