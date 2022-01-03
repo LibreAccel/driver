@@ -44,7 +44,7 @@ pub fn get_windows_kits_dir() -> Result<PathBuf, Error> {
 /// # Errors
 /// if a directory cannot be found.
 pub fn get_km_dir(dir_type: &DirectoryType) -> Result<PathBuf, Error> {
-  // We first append lib to the path and read the directory..
+  // We first append lib to the path and read the directory.
   let dir = get_windows_kits_dir()?
     .join(match dir_type {
       DirectoryType::Include => "Include",
@@ -67,7 +67,7 @@ pub fn get_km_dir(dir_type: &DirectoryType) -> Result<PathBuf, Error> {
     .max()
     .ok_or(Error::DirectoryNotFound)?;
 
-  // Finally append km to the path to get the path to the kernel mode libraries.
+  // Finally, append km to the path to get the path to the kernel mode libraries.
   Ok(dir.join("km"))
 }
 
