@@ -256,7 +256,7 @@ impl From<u32> for DeviceType {
       winapi::um::winioctl::FILE_DEVICE_TAPE_FILE_SYSTEM => DeviceType::TapeFileSystem,
       winapi::um::winioctl::FILE_DEVICE_TERMSRV => DeviceType::Termsrv,
       winapi::um::winioctl::FILE_DEVICE_TRANSPORT => DeviceType::Transport,
-      winapi::um::winioctl::FILE_DEVICE_UNKNOWN => DeviceType::Unknown,
+      // winapi::um::winioctl::FILE_DEVICE_UNKNOWN => DeviceType::Unknown,
       winapi::um::winioctl::FILE_DEVICE_VDM => DeviceType::Vdm,
       winapi::um::winioctl::FILE_DEVICE_VIDEO => DeviceType::Video,
       winapi::um::winioctl::FILE_DEVICE_VIRTUAL_DISK => DeviceType::VirtualDisk,
