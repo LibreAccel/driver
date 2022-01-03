@@ -18,7 +18,7 @@ impl ParseCallbacks for Callbacks {
 fn generate_base() {
   println!("cargo:rerun-if-changed=src/wrapper.h");
 
-  let include_dir = windows_kernel_build::get_km_dir(DirectoryType::Include).unwrap();
+  let include_dir = windows_kernel_build::get_km_dir(&DirectoryType::Include).unwrap();
   let out_path = PathBuf::from(
     std::env::var_os("OUT_DIR").expect("the environment variable OUT_DIR is undefined"),
   );
@@ -44,7 +44,7 @@ fn generate_base() {
 fn generate_intrin() {
   println!("cargo:rerun-if-changed=src/wrapper_intrin.c");
 
-  let include_dir = windows_kernel_build::get_km_dir(DirectoryType::Include).unwrap();
+  let include_dir = windows_kernel_build::get_km_dir(&DirectoryType::Include).unwrap();
 
   cc::Build::new()
     .flag("/kernel")
@@ -62,7 +62,7 @@ fn generate_ntoskrnl() {
   println!("cargo:rerun-if-changed=src/wrapper.c");
   println!("cargo:rustc-link-lib=ntoskrnl");
 
-  let include_dir = windows_kernel_build::get_km_dir(DirectoryType::Include).unwrap();
+  let include_dir = windows_kernel_build::get_km_dir(&DirectoryType::Include).unwrap();
   let out_path = PathBuf::from(
     std::env::var_os("OUT_DIR").expect("the environment variable OUT_DIR is undefined"),
   );
