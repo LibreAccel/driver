@@ -23,14 +23,20 @@ pub struct Driver {
 }
 
 impl Driver {
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn from_raw(raw: *mut DRIVER_OBJECT) -> Self {
     Self {
       raw,
     }
   }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn as_raw(&self) -> *const DRIVER_OBJECT { self.raw as _ }
 
+  /// # Safety
+  /// `unsafe`
   pub unsafe fn as_raw_mut(&mut self) -> *mut DRIVER_OBJECT { self.raw as _ }
 
   pub fn create_device<T>(
