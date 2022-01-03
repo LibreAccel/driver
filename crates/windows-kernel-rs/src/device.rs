@@ -30,10 +30,11 @@ pub enum Access {
 
 impl Access {
   pub fn is_exclusive(&self) -> bool {
-    match *self {
-      Access::Exclusive => true,
-      _ => false,
-    }
+    // match *self {
+    //   Access::Exclusive => true,
+    //   _ => false,
+    // }
+    matches!(*self, Access::Exclusive)
   }
 }
 
