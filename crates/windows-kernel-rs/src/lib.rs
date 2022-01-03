@@ -1,6 +1,5 @@
 #![no_std]
 #![feature(alloc_error_handler)]
-#![allow(clippy::too_many_arguments)]
 
 extern crate alloc;
 
