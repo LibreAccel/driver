@@ -1,5 +1,14 @@
 #![no_std]
 #![feature(alloc_error_handler)]
+// TODO
+// #![deny(
+//   warnings,
+//   nonstandard_style,
+//   unused,
+//   future_incompatible,
+//   rust_2018_idioms
+// )]
+// #![deny(clippy::all, clippy::nursery, clippy::pedantic)]
 
 extern crate alloc;
 
