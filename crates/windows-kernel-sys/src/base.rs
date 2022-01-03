@@ -1,3 +1,12 @@
+// TODO: `cargo clippy`
+// #![deny(
+//   warnings,
+//   nonstandard_style,
+//   unused,
+//   future_incompatible,
+//   rust_2018_idioms
+// )]
+// #![deny(clippy::all, clippy::nursery, clippy::pedantic)]
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
