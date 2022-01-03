@@ -15,7 +15,9 @@ unsafe impl Send for MemoryDescriptorList {}
 unsafe impl Sync for MemoryDescriptorList {}
 
 impl MemoryDescriptorList {
-  pub fn new(addr: *mut core::ffi::c_void, size: usize) -> Result<Self, Error> {
+  /// # Safety
+  /// `unsafe`
+  pub unsafe fn new(addr: *mut core::ffi::c_void, size: usize) -> Result<Self, Error> {
     use windows_kernel_sys::ntoskrnl::IoAllocateMdl;
 
     let raw = unsafe {
