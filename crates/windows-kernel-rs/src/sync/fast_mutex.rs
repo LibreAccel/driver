@@ -26,15 +26,15 @@ use windows_kernel_sys::{
 /// [`new`]: FastMutex::new
 /// [`lock`]: FastMutex::lock
 /// [`try_lock`]: FastMutex::try_lock
-pub struct FastMutex<T: ?Sized> {
+pub struct FastMutex<T: ?Sized + Send> {
   pub(crate) lock: Box<FAST_MUTEX>,
   pub(crate) data: UnsafeCell<T>,
 }
 
-unsafe impl<T> Send for FastMutex<T> {}
-unsafe impl<T> Sync for FastMutex<T> {}
+unsafe impl<T: Send> Send for FastMutex<T> {}
+unsafe impl<T: Send> Sync for FastMutex<T> {}
 
-impl<T> FastMutex<T> {
+impl<T: Send> FastMutex<T> {
   /// Creates a new mutex in an unlocked state ready for use.
   pub fn new(data: T) -> Self {
     let mut lock: Box<FAST_MUTEX> = Box::new(unsafe { core::mem::zeroed() });
@@ -98,11 +98,11 @@ impl<T> FastMutex<T> {
   }
 }
 
-impl<T: ?Sized + Default> Default for FastMutex<T> {
+impl<T: ?Sized + Default + Send> Default for FastMutex<T> {
   fn default() -> Self { Self::new(T::default()) }
 }
 
-impl<T> From<T> for FastMutex<T> {
+impl<T: Send> From<T> for FastMutex<T> {
   fn from(data: T) -> Self { Self::new(data) }
 }
 
