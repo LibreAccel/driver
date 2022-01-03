@@ -51,7 +51,8 @@ pub fn get_km_dir(dir_type: DirectoryType) -> Result<PathBuf, Error> {
         .unwrap_or(false)
     })
     .max()
-    .ok_or_else(|| Error::DirectoryNotFound)?;
+    // .ok_or_else(|| Error::DirectoryNotFound)?;
+    .ok_or(Error::DirectoryNotFound)?;
 
   // Finally append km to the path to get the path to the kernel mode libraries.
   Ok(dir.join("km"))
