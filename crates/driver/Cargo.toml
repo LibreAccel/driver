@@ -18,11 +18,6 @@ crate-type = ["cdylib"]
 [build-dependencies]
 windows-kernel-build = { path = "../windows-kernel-build" }
 
-[dependencies.winapi]
-git = "https://github.com/Trantect/winapi-rs.git"
-branch = "feature/km"
-features = [
-  "wdm",
-  "ntstatus",
-  "ntdef"
-]
+[dependencies]
+winapi = { git = "https://github.com/Trantect/winapi-rs.git", branch = "feature/km", features = ["wdm", "ntstatus", "ntdef"] }
+windows-kernel-rs = { path = "../windows-kernel-rs" }

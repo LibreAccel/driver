@@ -12,36 +12,19 @@
 )]
 #![deny(clippy::all, clippy::nursery, clippy::pedantic)]
 
-use winapi::{
-  km::wdm::{DbgPrint, DRIVER_OBJECT},
-  shared::ntdef::{NTSTATUS, UNICODE_STRING},
-};
+use windows_kernel_rs::{kernel_module, println, Driver, Error, KernelModule};
 
-#[panic_handler]
-const fn panic(_info: &core::panic::PanicInfo<'_>) -> ! { loop {} }
+struct Module;
+impl KernelModule for Module {
+  fn init(_: Driver, _: &str) -> Result<Self, Error> {
+    println!("init()");
 
-// https://users.rust-lang.org/t/solved-hello-world-no-std-build-problem/23122/4
-#[lang = "eh_personality"]
-const extern "C" fn eh_personality() {}
-
-/// # Safety
-/// `unsafe`
-#[no_mangle]
-pub extern "system" fn driver_entry(driver: &mut DRIVER_OBJECT, _: &UNICODE_STRING) -> NTSTATUS {
-  unsafe {
-    DbgPrint("driver_entry()\0".as_ptr());
+    Ok(Module)
   }
 
-  driver.DriverUnload = Some(driver_exit);
-
-  winapi::shared::ntstatus::STATUS_SUCCESS
-}
-
-/// # Safety
-/// `unsafe`
-#[no_mangle]
-pub extern "system" fn driver_exit(_driver: &mut DRIVER_OBJECT) {
-  unsafe {
-    DbgPrint("driver_exit()\0".as_ptr());
+  fn cleanup(&mut self, _: Driver) {
+    println!("cleanup()");
   }
 }
+
+kernel_module!(Module);
