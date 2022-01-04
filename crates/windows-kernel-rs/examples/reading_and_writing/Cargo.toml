@@ -1,5 +1,5 @@
 [package]
-name = "reading_and_writing"
+name = "reading_and_writing_example"
 version = "0.1.0"
 authors = ["Fuwn <contact@fuwn.me>"]
 edition = "2021"

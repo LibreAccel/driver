@@ -1,5 +1,5 @@
 [package]
-name = "io_controls"
+name = "io_controls_example"
 version = "0.1.0"
 authors = ["Fuwn <contact@fuwn.me>"]
 edition = "2021"

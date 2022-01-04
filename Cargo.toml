@@ -14,7 +14,11 @@ members = [
   "crates/windows-kernel-sys",
   "crates/windows-kernel-sys/examples/generate_bindings",
 
-  "crates/winioctl"
+  "crates/winioctl",
+
+  "crates/user/creating_devices",
+  "crates/user/io_controls",
+  "crates/user/reading_and_writing"
 ]
 
 [profile.dev]

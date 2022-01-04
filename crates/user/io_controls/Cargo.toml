@@ -1,0 +1,8 @@
+[package]
+name = "io_controls"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[target.'cfg(windows)'.dependencies]
+winioctl = { path = "../../winioctl" }
