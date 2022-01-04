@@ -16,6 +16,7 @@ Cargo.lock
 # Development
 /src/_*.*
 /crates/**/target/
+*.cer
 
 # NPM
 /node_modules/

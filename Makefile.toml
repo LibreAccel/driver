@@ -10,7 +10,7 @@ TARGET_PATH = "target/debug"
 
 [env.production]
 TARGET_PATH = "target/release"
-# BUILD_RELEASE = "--release"
+BUILD_RELEASE = "--release"
 
 # ------------
 # | Wrappers |
@@ -42,12 +42,13 @@ workspace = false
 dependencies = ["fmt", "check", "clippy"]
 
 [tasks.build-driver]
+workspace = false
 script = '''
 cargo b %BUILD_FLAGS%
 '''
 
-[tasks.rename-driver]
-
+[tasks.rename]
+workspace = false
 ignore_errors = true
 script = '''
 cd %TARGET_PATH%
@@ -55,15 +56,18 @@ rename driver.dll driver.sys
 '''
 
 [tasks.clean-cert]
+workspace = false
+script_runner = "@shell"
 script = '''
-# Remove the self-signed certificate.
-if exist DriverCertificate.cer ( rm DriverCertificate.cer )
+if exist Fuwn.cer ( rm Fuwn.cer )
 '''
 
 [tasks.sign]
-dependencies = ["build-driver", "rename"]
+workspace = false
+dependencies = ["build-driver", "rename", "clean-cert"]
 script = '''
 call "%VC_BUILD_DIR%"
-if not exist DriverCertificate.cer ( makecert -r -pe -ss PrivateCertStore -n CN=DriverCertificate DriverCertificate.cer ) else ( echo Certificate already exists. )
-signtool sign /a /v /s PrivateCertStore /n DriverCertificate /fd certHash /t http://timestamp.digicert.com %TARGET_PATH%/driver.sys
+if not exist Fuwn.cer ( makecert -r -pe -ss PrivateCertStore -n CN=Fuwn Fuwn.cer ) else ( echo Certificate already exists. )
+# https://docs.microsoft.com/en-us/dotnet/framework/tools/signtool-exe
+signtool sign /a /v /s PrivateCertStore /n Fuwn /fd certHash /t http://timestamp.digicert.com %TARGET_PATH%/driver.sys
 '''
