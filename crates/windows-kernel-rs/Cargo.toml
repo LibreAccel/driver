@@ -23,12 +23,6 @@ name = "safe_framework"
 crate-type = ["cdylib"]
 path = "examples/safe_framework/src/lib.rs"
 
-[profile.dev]
-panic = "abort"
-
-[profile.release]
-panic = "abort"
-
 [features]
 default = ["alloc"]
 alloc = []
