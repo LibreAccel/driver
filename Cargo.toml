@@ -1,9 +1,19 @@
 [workspace]
 members = [
   "crates/driver",
+
   "crates/windows-kernel-build",
+  "crates/windows-kernel-build/examples/hello_world",
+
   "crates/windows-kernel-rs",
+  "crates/windows-kernel-rs/examples/creating_devices",
+  "crates/windows-kernel-rs/examples/io_controls",
+  "crates/windows-kernel-rs/examples/reading_and_writing",
+  "crates/windows-kernel-rs/examples/safe_framework",
+
   "crates/windows-kernel-sys",
+  "crates/windows-kernel-sys/examples/generate_bindings",
+
   "crates/winioctl"
 ]
 

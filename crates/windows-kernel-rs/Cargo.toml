@@ -3,7 +3,25 @@ name = "windows-kernel-rs"
 version = "0.1.0"
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[example]]
+name = "creating_devices"
+crate-type = ["cdylib"]
+path = "examples/creating_devices/src/lib.rs"
+
+[[example]]
+name = "io_controls"
+crate-type = ["cdylib"]
+path = "examples/io_controls/src/lib.rs"
+
+[[example]]
+name = "reading_and_writing"
+crate-type = ["cdylib"]
+path = "examples/reading_and_writing/src/lib.rs"
+
+[[example]]
+name = "safe_framework"
+crate-type = ["cdylib"]
+path = "examples/safe_framework/src/lib.rs"
 
 [profile.dev]
 panic = "abort"

@@ -1,0 +1,21 @@
+[package]
+name = "hello_world"
+version = "0.1.0"
+authors = ["Fuwn <contact@fuwn.me>"]
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[build-dependencies]
+windows-kernel-build = { path = "../../../windows-kernel-build" }
+
+[dependencies.winapi]
+git = "https://github.com/Trantect/winapi-rs.git"
+branch = "feature/km"
+features = [
+  "wdm",
+  "ntstatus",
+  "ntdef"
+]

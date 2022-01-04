@@ -1,0 +1,18 @@
+[package]
+name = "creating_devices"
+version = "0.1.0"
+authors = ["Fuwn <contact@fuwn.me>"]
+edition = "2021"
+publish = false
+build = "../build.rs"
+
+[lib]
+crate-type = ["cdylib"]
+
+[build-dependencies]
+windows-kernel-build = { path = "../../../windows-kernel-build" }
+
+[dependencies]
+widestring = { version = "0.4", default-features = false, features = ["alloc"] }
+windows-kernel-rs = { path = "../../../windows-kernel-rs" }
+windows-kernel-sys = { path = "../../../windows-kernel-sys" }

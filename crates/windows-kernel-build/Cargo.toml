@@ -3,7 +3,13 @@ name = "windows-kernel-build"
 version = "0.1.0"
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[example]]
+name = "hello_world"
+crate-type = ["cdylib"]
+path = "examples/hello_world/src/lib.rs"
+
+[dev-dependencies]
+winapi = { git = "https://github.com/Trantect/winapi-rs.git", branch = "feature/km", features = ["wdm", "ntstatus", "ntdef"] }
 
 [dependencies]
 thiserror = "1.0"
