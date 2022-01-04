@@ -11,12 +11,26 @@
 
 extern crate alloc;
 
-use alloc::vec;
-use alloc::vec::Vec;
-use windows_kernel_rs::device::{
-  Completion, Device, DeviceDoFlags, DeviceFlags, DeviceOperations, DeviceType, RequestError};
-use windows_kernel_rs::request::{ReadRequest, WriteRequest};
-use windows_kernel_rs::{Access, Driver, Error, kernel_module, KernelModule, SymbolicLink};
+use alloc::{vec, vec::Vec};
+
+use windows_kernel_rs::{
+  device::{
+    Completion,
+    Device,
+    DeviceDoFlags,
+    DeviceFlags,
+    DeviceOperations,
+    DeviceType,
+    RequestError,
+  },
+  kernel_module,
+  request::{ReadRequest, WriteRequest},
+  Access,
+  Driver,
+  Error,
+  KernelModule,
+  SymbolicLink,
+};
 
 struct MyDevice {
   data: Vec<u8>,
@@ -52,7 +66,7 @@ impl DeviceOperations for MyDevice {
 }
 
 struct Module {
-  _device: Device,
+  _device:        Device,
   _symbolic_link: SymbolicLink,
 }
 
@@ -65,13 +79,13 @@ impl KernelModule for Module {
       DeviceDoFlags::DO_BUFFERED_IO,
       Access::NonExclusive,
       MyDevice {
-        data: vec![],
+        data: vec![]
       },
     )?;
     let symbolic_link = SymbolicLink::new("\\??\\Example", "\\Device\\Example")?;
 
     Ok(Module {
-      _device: device,
+      _device:        device,
       _symbolic_link: symbolic_link,
     })
   }

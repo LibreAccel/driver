@@ -9,18 +9,33 @@
 )]
 #![deny(clippy::all, clippy::nursery, clippy::pedantic)]
 
-use windows_kernel_rs::device::{
-  Completion, Device, DeviceDoFlags, DeviceFlags, DeviceOperations, DeviceType, RequestError};
-use windows_kernel_rs::request::IoControlRequest;
-use windows_kernel_rs::{kernel_module, println};
-use windows_kernel_rs::{Access, Driver, Error, KernelModule, RequiredAccess, SymbolicLink};
+use windows_kernel_rs::{
+  device::{
+    Completion,
+    Device,
+    DeviceDoFlags,
+    DeviceFlags,
+    DeviceOperations,
+    DeviceType,
+    RequestError,
+  },
+  kernel_module,
+  println,
+  request::IoControlRequest,
+  Access,
+  Driver,
+  Error,
+  KernelModule,
+  RequiredAccess,
+  SymbolicLink,
+};
 
 struct MyDevice {
   value: u32,
 }
 
 const IOCTL_PRINT_VALUE: u32 = 0x800;
-const IOCTL_READ_VALUE:  u32 = 0x801;
+const IOCTL_READ_VALUE: u32 = 0x801;
 const IOCTL_WRITE_VALUE: u32 = 0x802;
 
 impl MyDevice {
@@ -48,14 +63,15 @@ impl MyDevice {
 }
 
 impl DeviceOperations for MyDevice {
-  fn ioctl(&mut self, _device: &Device, request: IoControlRequest) -> Result<Completion, RequestError> {
+  fn ioctl(
+    &mut self,
+    _device: &Device,
+    request: IoControlRequest,
+  ) -> Result<Completion, RequestError> {
     let result = match request.function() {
-      (_, IOCTL_PRINT_VALUE) =>
-        self.print_value(&request),
-      (RequiredAccess::READ_DATA, IOCTL_READ_VALUE) =>
-        self.read_value(&request),
-      (RequiredAccess::WRITE_DATA, IOCTL_WRITE_VALUE) =>
-        self.write_value(&request),
+      (_, IOCTL_PRINT_VALUE) => self.print_value(&request),
+      (RequiredAccess::READ_DATA, IOCTL_READ_VALUE) => self.read_value(&request),
+      (RequiredAccess::WRITE_DATA, IOCTL_WRITE_VALUE) => self.write_value(&request),
       _ => Err(Error::INVALID_PARAMETER),
     };
 
@@ -67,7 +83,7 @@ impl DeviceOperations for MyDevice {
 }
 
 struct Module {
-  _device: Device,
+  _device:        Device,
   _symbolic_link: SymbolicLink,
 }
 
@@ -80,19 +96,18 @@ impl KernelModule for Module {
       DeviceDoFlags::DO_BUFFERED_IO,
       Access::NonExclusive,
       MyDevice {
-        value: 0,
+        value: 0
       },
     )?;
     let symbolic_link = SymbolicLink::new("\\??\\Example", "\\Device\\Example")?;
 
     Ok(Module {
-      _device: device,
+      _device:        device,
       _symbolic_link: symbolic_link,
     })
   }
 
-  fn cleanup(&mut self, _driver: Driver) {
-  }
+  fn cleanup(&mut self, _driver: Driver) {}
 }
 
 kernel_module!(Module);
