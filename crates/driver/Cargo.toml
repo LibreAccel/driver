@@ -4,8 +4,8 @@ version = "0.1.0"
 authors = ["Fuwn <contact@fuwn.me>"]
 edition = "2021"
 description = ""
-homepage = "https://github.com/rawaccel/driver"
-repository = "https://github.com/rawaccel/driver"
+homepage = "https://github.com/LibreAccel/driver"
+repository = "https://github.com/LibreAccel/driver"
 license = "MIT"
 publish = false
 
