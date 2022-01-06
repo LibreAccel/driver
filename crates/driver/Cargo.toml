@@ -6,7 +6,7 @@ edition = "2021"
 description = ""
 homepage = "https://github.com/rawaccel/driver"
 repository = "https://github.com/rawaccel/driver"
-license = "GPL-3.0-only"
+license = "MIT"
 publish = false
 
 [lib]

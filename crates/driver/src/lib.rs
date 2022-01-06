@@ -1,5 +1,5 @@
 // Copyright (C) 2022-2022 Fuwn
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: MIT
 
 #![no_std]
 #![feature(lang_items, const_extern_fn)]
